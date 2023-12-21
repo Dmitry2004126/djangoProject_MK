@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Info about referee</title>
+    {% extends "base.html" %}
+</head>
+<body>
+{% block content %}
+    <div class="container">
+         <div class="my-auto d-grip gap-2"></div>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Last Game</th>
+                  <th scope="col">Goals</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+              {% for footballer, sumGoals, lastGames in footballers %}
+                {% if sumGoals >= 15 %}
+                    <tr class="bg-success">
+                {%  elif sumGoals <= 1 %}
+                    {% if sumGoals > 0 %}
+                        <tr class="bg-danger">
+                    {% endif %}
+                {%  else %}
+                    <tr>
+                {%  endif %}
+                  <td>{{ footballer.first_name }} {{ footballer.last_name }}</td>
+                  <td>{{ lastGames }}</td>
+                  <td>{{ sumGoals }}</td>
+                  <td><a href="{%  url 'show_footballer' name_division id_club footballer.id_user.id %}" class="btn btn-success">Info</a> </td>
+                </tr>
+              {%  endfor %}
+              </tbody>
+            </table>
+    </div>
+    <div>
+        <h3>Click it to go back -> <a href= "{% url 'footballer_ofDivision'  name_division %}" class="btn btn-info" type="submit">Back</a></h3>
+    </div>
+{% endblock %}
+</body>
+</html>

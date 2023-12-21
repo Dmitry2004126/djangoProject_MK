@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Info about referee</title>
+    {% extends "base.html" %}
+    {% load static %}
+</head>
+<body>
+{% block content %}
+    <div class="container">
+        <div  style="justify-content: center; display: flex">
+            <div class="card" style="width: 18rem;">
+              <img src="{% static 'img/2.jpg' %}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Referee</h5>
+                <p class="card-text">Referee's name: {{ referee.first_name }}</p>
+                <p class="card-text">Referee's last name: <mark>{{ referee.last_name }}</mark></p>
+                <p class="card-text">Referee's number of games: <b>{{ referee.number_games}}</b></p>
+              </div>
+            </div>
+        </div>
+        <div style="text-align: center">
+            <p>Referee's divisions: </p>
+            {% for division in divisions %}
+                <a href="{% url 'footballer_ofDivision'  division.name_division  %}" type="button" class="btn btn-outline-primary btn-lg" >{{ division.name_division }}</a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>
